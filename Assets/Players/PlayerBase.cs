@@ -10,40 +10,28 @@ public class PlayerBase : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float maxMoveSpeed = 5f;
-    // amount of time it takes to accelerate from 0 to maxMoveSpeed
-    [SerializeField] private float accelerationTime = 0.1f;
-    // amount of time it takes to decelerate from maxMoveSpeed to 0;
-    [SerializeField] private float decelerationTime = 0.1f;
+    [SerializeField] private float moveAcceleration = 0.1f;
 
     [Header("Health")]
     [SerializeField] private float maxHealth;
     [SerializeField] private float health;
 
+    // These two should be guaranteed to be normalized
     private Vector2 moveDirection;
-    // what percentage of the max speed we are going
+    private Vector2 mostRecentMoveDirection;
 
+    // Components
+    private Interactor interactor;
     private Rigidbody2D rigidBody;
     private Camera mainCamera;
     private PlayerInputHandler playerInputHandler;
 
     private void Awake()
     {
+        interactor = GetComponent<Interactor>();
         rigidBody = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
         playerInputHandler = GetComponent<PlayerInputHandler>();
-
-        // change accel and decel time to not cause divide by 0 error
-        // however, this may still seems to not work so whatever
-        if (accelerationTime <= 0.01)
-        {
-            Debug.LogWarning("your player acceleration time is close to 0, which may not work well");
-            accelerationTime = 0.01f;
-        }
-        if (decelerationTime <= 0.01)
-        {
-            Debug.LogWarning("your player deceleration time is close to 0, which may not work well");
-            decelerationTime = 0.01f;
-        }
     }
 
     // Start is called before the first frame update
@@ -56,6 +44,7 @@ public class PlayerBase : MonoBehaviour
     void Update()
     {
         GetMovementInput();
+        UpdateInteractorPosition();
     }
 
     private void FixedUpdate()
@@ -72,41 +61,29 @@ public class PlayerBase : MonoBehaviour
     {
         moveDirection = playerInputHandler.MoveInput;
         moveDirection.Normalize();
+        if (moveDirection.magnitude >= 0.1)
+        {
+            mostRecentMoveDirection = moveDirection;
+        }
     }
     
+    void UpdateInteractorPosition()
+    {
+        interactor.interactionPoint.localPosition = mostRecentMoveDirection;
+    }
+
     // handles acceleration, deceleration, and movement inputs
     void HandleMovement()
     {
-        // if we aren't holding an input, decelerate the player
-        if (moveDirection == Vector2.zero)
+        // Handle Acceleration
+        // if we are holding an input, accelerate in that direction
+        if (moveDirection != Vector2.zero)
         {
-            Vector2 newVelocity = rigidBody.velocity - rigidBody.velocity * maxMoveSpeed / decelerationTime * Time.fixedDeltaTime;
-            // if we would decelerate to going to the other direction, set our velocity to 0
-            if (Vector2.Dot(rigidBody.velocity, newVelocity) < 0)
-            {
-                moveDirection = Vector2.zero;
-            }
-            else
-            {
-                rigidBody.velocity = newVelocity;
-            }
-        }
-        else
-        {
-            // if we are holding an input, accelerate the player in that direction
-            // if we are trying to go in the opposite direction, reduce the effect of current velocity
-            Vector2 velocityIncrease = moveDirection * maxMoveSpeed / accelerationTime * Time.fixedDeltaTime;
-            if (Vector2.Angle(moveDirection, rigidBody.velocity) > 40)
-            {
-                rigidBody.velocity -= rigidBody.velocity * maxMoveSpeed / decelerationTime * Time.fixedDeltaTime;
-            }
-            rigidBody.velocity += velocityIncrease;
+            Vector2 deltaVelocityIncrease = moveDirection * maxMoveSpeed / moveAcceleration * Time.fixedDeltaTime;
+            rigidBody.velocity += deltaVelocityIncrease;
             // if we are faster than our max speed, clamp our speed
             // technically since we only check for this when the player is moving at some point this means the velocity is uncapped when the player isn't holding a movement button
-            if (rigidBody.velocity.sqrMagnitude > maxMoveSpeed * maxMoveSpeed)
-            {
-                rigidBody.velocity = (rigidBody.velocity + velocityIncrease).normalized * maxMoveSpeed;
-            }
+            rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxMoveSpeed); 
         }
     }
 }
