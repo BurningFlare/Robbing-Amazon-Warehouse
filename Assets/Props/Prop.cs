@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Prop : MonoBehaviour, IInteractable
+public abstract class Prop : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public abstract TransmutationBase transmutation {
+        get;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Selected()
     {
-        
+
+    }
+
+    public bool Interact(Interactor interactor)
+    {
+        return interactor.player.Transmute(transmutation);
     }
 }

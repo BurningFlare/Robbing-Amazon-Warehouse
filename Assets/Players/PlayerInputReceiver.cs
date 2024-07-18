@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputReceiver : MonoBehaviour
 {
     [Header("Input Action Asset")]
     [SerializeField] private InputActionAsset playerControls;
@@ -27,7 +27,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpTriggered { get; private set; }
 
     // only want a single instance of the input handler
-    public static PlayerInputHandler Instance { get; private set; }
+    public static PlayerInputReceiver Instance { get; private set; }
 
     private void Awake()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interactor : MonoBehaviour
 {
     [SerializeField] public Transform interactionPoint;
+    [SerializeField] public Player player;
     [SerializeField] private float interactionRadius = 1f;
     [SerializeField] private LayerMask interactionMask;
 
