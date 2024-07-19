@@ -12,6 +12,14 @@ public class Interactor : MonoBehaviour
     private readonly Collider2D[] interactableColliders = new Collider2D[3];
     [SerializeField] private int numFound;
 
+    private void Awake()
+    {
+        if (player == null) {
+            player = gameObject.GetComponent<Player>();
+        }
+        interactionPoint = player.currentTransmutation.transform.Find("interactionPoint");
+    }
+
     private void Update()
     {
         numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionRadius, interactableColliders, interactionMask);

@@ -13,10 +13,15 @@ public class TransmutationBase : MonoBehaviour {
     [SerializeField] protected float maxHealth;
     public float health;
 
+    // Components
+    private Interactor interactor;
     private Rigidbody2D rigidBody;
+
+    private Vector2 mostRecentMoveDirection = Vector2.zero;
 
     private void Awake()
     {
+        interactor = transform.parent.GetComponent<Interactor>();
         health = maxHealth;
         rigidBody = GetComponent<Rigidbody2D>();
     }
@@ -35,6 +40,16 @@ public class TransmutationBase : MonoBehaviour {
             // technically since we only check for this when the player is moving at some point this means the velocity is uncapped when the player isn't holding a movement button
             rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxMoveSpeed);
         }
+        if (moveDirection.sqrMagnitude > 0.01)
+        {
+            mostRecentMoveDirection = moveDirection;
+        }
+        UpdateInteractorPosition();
+    }
+
+    void UpdateInteractorPosition()
+    {
+        interactor.interactionPoint.localPosition = mostRecentMoveDirection;
     }
 
     public void HandleJump(bool jump)
