@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class TransmutationBase : MonoBehaviour {
 
     [Header("Movement")]

@@ -6,29 +6,53 @@ public class Interactor : MonoBehaviour
 {
     [SerializeField] public Transform interactionPoint;
     [SerializeField] public Player player;
-    [SerializeField] private float interactionRadius = 1f;
     [SerializeField] private LayerMask interactionMask;
 
-    private readonly Collider2D[] interactableColliders = new Collider2D[3];
-    [SerializeField] private int numFound;
+    [SerializeField] private InteractionPointTrigger interactionPointTrigger;
+
+    private IInteractable currentSelection;
 
     private void Awake()
     {
-        if (player == null) {
+        if (player == null)
+        {
             player = gameObject.GetComponent<Player>();
         }
-        interactionPoint = player.currentTransmutation.transform.Find("interactionPoint");
+        if (interactionPoint == null)
+        {
+            interactionPoint = player.currentTransmutation.transform.Find("interactionPoint");
+        }
+        if (interactionMask < 1)
+        {
+            interactionMask = LayerMask.NameToLayer("Interactable");
+        }
+        interactionPointTrigger = interactionPoint.GetComponent<InteractionPointTrigger>();
+        currentSelection = null;
     }
 
     private void Update()
     {
-        numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionRadius, interactableColliders, interactionMask);
-        Debug.Log(interactionPoint.position);
+        // TODO maybe need to filter out the type of interactable that the player is currently using
+        IInteractable selection = interactionPointTrigger.getClosestInteractable();
+        if (selection != currentSelection)
+        {
+            if (currentSelection != null)
+            {
+                currentSelection.Deselected();
+            }
+
+            currentSelection = selection;
+            
+            if (selection != null)
+            {
+                selection.Selected();
+            }
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
+        Gizmos.DrawWireSphere(interactionPoint.position, interactionPoint.GetComponent<CircleCollider2D>().radius);
     }
 }

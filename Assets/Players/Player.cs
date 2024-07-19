@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
         moveDirection.Normalize();
     }
 
+    // TODO handle interaction
+
     public bool Transmute(TransmutationBase transmutation)
     {
         // TODO modify health to be equivalent

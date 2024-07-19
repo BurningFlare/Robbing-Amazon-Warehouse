@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1816058121848307600}
   - component: {fileID: 322907877219361889}
-  - component: {fileID: 2009017705390417662}
+  - component: {fileID: 5478175766707462388}
+  - component: {fileID: 8796866201830798167}
   m_Layer: 0
   m_Name: box
   m_TagString: Untagged
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2009017705390417662
+--- !u!114 &5478175766707462388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +95,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7413445325316497783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 200, y: 200}
-  m_UseGraphicAlpha: 1
+  color: 0
+  eraseRenderer: 0
+--- !u!114 &8796866201830798167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413445325316497783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b3c2266952526478213ebcdbf54d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transmutation: {fileID: 2974561643172258231, guid: ee2add1375acc064f8ec2a12477c1842, type: 3}
