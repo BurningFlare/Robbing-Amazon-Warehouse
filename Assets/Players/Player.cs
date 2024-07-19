@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
         {
             // TODO make default transmutation base the player one
             //currentTransmutation = new TransmutationBase(
+            //currentTransmutation.transform.SetParent(transform, false);
         }
     }
 
