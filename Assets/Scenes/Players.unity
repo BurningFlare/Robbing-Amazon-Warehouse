@@ -406,6 +406,75 @@ MonoBehaviour:
   outlineShaderMaterial: {fileID: 0}
   renderTexture: {fileID: 0}
   extraRenderTexture: {fileID: 0}
+--- !u!1001 &1962758183
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3086743973739487879, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_Name
+      value: DefaultGuard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711855951196085702, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.05536206
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797120670373510540, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523943857002088227, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523943857002088227, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 881122496}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b242e0b2fca6d22478bf969d1470ef07, type: 3}
 --- !u!1001 &2065073545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -420,15 +489,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6812543734401710381, guid: 9b0871db6539ab541b9750a890c397fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.14619583
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6812543734401710381, guid: 9b0871db6539ab541b9750a890c397fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7396486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6812543734401710381, guid: 9b0871db6539ab541b9750a890c397fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.05536206
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6812543734401710381, guid: 9b0871db6539ab541b9750a890c397fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -534,4 +603,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1949618553}
   - {fileID: 2877493480040203813}
+  - {fileID: 1962758183}
   - {fileID: 881122497}
