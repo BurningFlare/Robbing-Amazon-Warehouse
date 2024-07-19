@@ -8,7 +8,7 @@ public class Interactor : MonoBehaviour
     [SerializeField] public Player player;
     [SerializeField] private LayerMask interactionMask;
 
-    [SerializeField] private InteractionPointTrigger interactionPointTrigger;
+    private InteractionPointTrigger interactionPointTrigger;
 
     private IInteractable currentSelection;
 
@@ -47,6 +47,33 @@ public class Interactor : MonoBehaviour
             {
                 selection.Selected();
             }
+        }
+    }
+
+    public void handleInteractionInput()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.Interact(this);
+        }
+    }
+
+    public void handleTransmutationChanged()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.Deselected(); 
+            currentSelection = null;
+        }
+
+        interactionPoint = player.currentTransmutation.transform.Find("interactionPoint");
+        if (interactionPoint == null)
+        {
+            Debug.LogWarning("Current transmutation does not provide an interaction point");
+            interactionPointTrigger = null;
+        } else
+        {
+            interactionPointTrigger = interactionPoint.GetComponent<InteractionPointTrigger>();
         }
     }
 

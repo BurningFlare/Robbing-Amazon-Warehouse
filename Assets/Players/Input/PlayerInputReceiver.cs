@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+[RequireComponent(typeof(Player))]
 
 public class PlayerInputReceiver : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class PlayerInputReceiver : MonoBehaviour
     // members to be read by player for input values
     public Vector2 MoveInput { get; private set; }
     public bool JumpTriggered { get; private set; }
-    public bool InteractTriggered { get; private set; }
 
     // only want a single instance of the input handler
     public static PlayerInputReceiver Instance { get; private set; }
@@ -48,7 +48,7 @@ public class PlayerInputReceiver : MonoBehaviour
        // bind the actions to the correct object within the input action asset
         moveAction = playerControls.FindActionMap(playerBasicActionMapName).FindAction(move);
         jumpAction = playerControls.FindActionMap(playerBasicActionMapName).FindAction(jump);
-        jumpAction = playerControls.FindActionMap(playerInteractActionMapName).FindAction(interact);
+        interactAction = playerControls.FindActionMap(playerInteractActionMapName).FindAction(interact);
         // setup event handling for inputs, change the values to be read
         RegisterInputActions();
     }
@@ -62,11 +62,11 @@ public class PlayerInputReceiver : MonoBehaviour
 
         // handle jump inputs
         jumpAction.performed += context => JumpTriggered = true;
-        jumpAction.canceled += context => JumpTriggered = false;
+        //jumpAction.canceled += context => ;
 
         // handle interact inputs
-        interactAction.performed += context => InteractTriggered = true;
-        interactAction.canceled += context => InteractTriggered = false;
+        interactAction.performed += context => GetComponent<Player>().handleInteractionInput();
+        //interactAction.canceled += context => ;
     }
 
     // enable and disable actions as necessary

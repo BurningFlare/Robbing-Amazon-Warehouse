@@ -28,4 +28,12 @@ public abstract class Transmutable : MonoBehaviour, IInteractable
     {
         return interactor.player.Transmute(transmutation);
     }
+
+    private void OnDestroy()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child);
+        }
+    }
 }
