@@ -15,6 +15,9 @@ public class TransmutationBase : MonoBehaviour {
     [SerializeField] protected float maxHealth;
     public float health;
 
+    [Header("Interaction")]
+    [SerializeField] protected float interactionDist = 0.5f; // how far ahead to place the interaction point from the player while moving
+
     // Components
     private Interactor interactor;
     private Rigidbody2D rigidBody;
@@ -51,7 +54,7 @@ public class TransmutationBase : MonoBehaviour {
 
     void UpdateInteractorPosition()
     {
-        interactor.interactionPoint.localPosition = mostRecentMoveDirection;
+        interactor.interactionPoint.localPosition = mostRecentMoveDirection * interactionDist;
     }
 
     public void HandleJump(bool jump)
