@@ -37,7 +37,10 @@ public class EnemyDirector : MonoBehaviour
     // This method should be used when reporting that the target was not found at the predicted location
     public static void reportTargetLost()
     {
-        
+        foreach (PathfindingEnemy enemy in currentlyChasing)
+        {
+            enemy.wanderTarget(reportedPredictedLocation);
+        }
     }
 
     // This method should be used when an enemy stops chasing the target
