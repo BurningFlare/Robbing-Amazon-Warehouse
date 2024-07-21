@@ -38,8 +38,20 @@ public class GameManager : MonoBehaviour
             cameraAnimator.SetBool("Dead", true);
             gameOver = true;
             player.Die();
-            gameOverPanel.SetActive(true);
+            StartCoroutine(waitToOpenGameOverPanel());
             // TODO death screen
         }
+    }
+
+    IEnumerator waitToOpenGameOverPanel()
+    {
+        yield return new WaitForSeconds(cameraAnimator.GetCurrentAnimatorStateInfo(0).length);
+        openGameOverPanel();
+    }
+
+    // should be called by the animator when the grayscale animation is over
+    public void openGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
     }
 }
