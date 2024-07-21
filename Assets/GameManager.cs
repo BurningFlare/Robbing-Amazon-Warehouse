@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // temp
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             playerDeath();
         }

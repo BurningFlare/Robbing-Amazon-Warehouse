@@ -12,8 +12,8 @@ public class TransmutationBase : MonoBehaviour {
     [SerializeField] protected float moveAcceleration = 0.1f;
 
     [Header("Health")]
-    [SerializeField] public readonly float maxHealth;
-    public float health;
+    [SerializeField] public float maxHealth = 3;
+    [SerializeField] public float health = 3;
 
     [Header("Interaction")]
     [SerializeField] protected float interactionDist = 0.5f; // how far ahead to place the interaction point from the player while moving

@@ -89,5 +89,6 @@ public class Player : MonoBehaviour
     {
         // TODO play death animation
         dead = true;
+        moveDirection = Vector2.zero;
     }
 }
