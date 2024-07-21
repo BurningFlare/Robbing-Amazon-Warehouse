@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         // I clamped it just to make sure it ends up in the correct bounds cuz of float precision but not sure if that's necessary
         currentTransmutation.health = Mathf.Ceil(Mathf.Lerp(0, currentTransmutation.maxHealth, oldHealthPercentage));
 
-        interactor.handleTransmutationChanged();
+        GameManager.Instance.handleTransmutationChanged(currentTransmutation);
 
         // TODO play cool transmutation animation
         // TODO replace final transmutation in hotbar

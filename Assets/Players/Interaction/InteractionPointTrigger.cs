@@ -41,8 +41,6 @@ public class InteractionPointTrigger : MonoBehaviour
 
     public IInteractable getClosestInteractable()
     {
-        Debug.Log(bruh);
-        Debug.Log(transform.parent);
         if (interactables.Count == 0) return null;
         float closestSqrDist = float.MaxValue;
         IInteractable closest = null;

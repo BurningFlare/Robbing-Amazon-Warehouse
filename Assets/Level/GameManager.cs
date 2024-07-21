@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Player player;
     [SerializeField] private GameObject gameOverPanel;
     
+    private Interactor interactor;
     public Animator cameraAnimator;
 
     private bool gameOver = false;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
         else { Destroy(this); }
         cameraAnimator = Camera.main.GetComponent<Animator>();
         // TODO get the player somehow idk
+
+        interactor = player.GetComponent<Interactor>();
     }
 
     private void Update()
@@ -53,5 +57,12 @@ public class GameManager : MonoBehaviour
     public void openGameOverPanel()
     {
         gameOverPanel.SetActive(true);
+    }
+
+    // should be called by the player when they switch transmutations, should tell all relevant objects about this change
+    public void handleTransmutationChanged(TransmutationBase player)
+    {
+        Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = player.gameObject.transform;
+        interactor.handleTransmutationChanged();
     }
 }
