@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +13,8 @@ public class Player : MonoBehaviour
     private Camera mainCamera;
     private PlayerInputReceiver playerInputReceiver;
     [SerializeField] public TransmutationBase currentTransmutation;
+
+    private bool dead = false;
 
     private void Awake()
     {
@@ -35,7 +34,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMovementInput();
+        if (!dead)
+        {
+            GetMovementInput();
+        }
     }
 
     private void FixedUpdate()
@@ -61,18 +63,31 @@ public class Player : MonoBehaviour
             return false;
         }
 
+        // saves old health so that we can change the health over
+        float oldHealthPercentage = currentTransmutation.health / currentTransmutation.maxHealth;
+
         Vector2 oldPosition = currentTransmutation.transform.position;
 
         Destroy(currentTransmutation.gameObject);
 
         currentTransmutation = Instantiate(transmutation, oldPosition, Quaternion.identity, transform).GetComponent<TransmutationBase>();
 
+        // modify health of transmutation to be proportionally equivalent to the previous
+        // rounds up to prevent weird behavior with setting the health to 0
+        // I clamped it just to make sure it ends up in the correct bounds cuz of float precision but not sure if that's necessary
+        currentTransmutation.health = Mathf.Ceil(Mathf.Lerp(0, currentTransmutation.maxHealth, oldHealthPercentage));
+
         interactor.handleTransmutationChanged();
 
-        // TODO modify health to be equivalent
         // TODO play cool transmutation animation
         // TODO replace final transmutation in hotbar
         // TODO handle transmutation cooldown
         return true;
+    }
+
+    public void Die()
+    {
+        // TODO play death animation
+        dead = true;
     }
 }

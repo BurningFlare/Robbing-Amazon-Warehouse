@@ -12,7 +12,7 @@ public class TransmutationBase : MonoBehaviour {
     [SerializeField] protected float moveAcceleration = 0.1f;
 
     [Header("Health")]
-    [SerializeField] protected float maxHealth;
+    [SerializeField] public readonly float maxHealth;
     public float health;
 
     [Header("Interaction")]
@@ -60,5 +60,14 @@ public class TransmutationBase : MonoBehaviour {
     public void HandleJump(bool jump)
     {
         // TODO check if player is on the ground and then figure out some vertical velocity bullshit and change the collider layers and something
+    }
+
+    public void Damage(float damageAmount)
+    {
+        health -= damageAmount;
+        if (health < 0)
+        {
+            GameManager.Instance.playerDeath();
+        }
     }
 }
