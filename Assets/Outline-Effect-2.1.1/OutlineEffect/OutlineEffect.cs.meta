@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: a78da3f00f3328541b4526c0b0b5ec5c
-timeCreated: 1487888760
-licenseType: Pro
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fillTexture: {instanceID: 0}
+  - sourceCamera: {instanceID: 0}
+  - outlineCamera: {instanceID: 0}
+  - outlineShaderMaterial: {fileID: 2100000, guid: 96243bf2fecccf64a9cab91343b05224, type: 2}
+  - renderTexture: {instanceID: 0}
+  - extraRenderTexture: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
