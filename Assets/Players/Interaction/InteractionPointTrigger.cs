@@ -10,7 +10,6 @@ public class InteractionPointTrigger : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> interactables = new List<GameObject>();
-    [SerializeField] string bruh = "default";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
