@@ -30,12 +30,17 @@ public class GameManager : MonoBehaviour
         // temp
         if (Input.GetKeyDown(KeyCode.C))
         {
-            playerDeath();
+            handlePlayerDeath();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log(player.inventory.ToString());
         }
     }
 
     // should be called when player dies
-    public void playerDeath()
+    public void handlePlayerDeath()
     {
         if (!gameOver)
         {
