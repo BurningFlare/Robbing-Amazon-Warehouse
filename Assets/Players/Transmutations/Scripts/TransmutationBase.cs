@@ -10,6 +10,8 @@ public class TransmutationBase : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] protected float maxMoveSpeed = 5f;
     [SerializeField] protected float moveAcceleration = 0.1f;
+    [SerializeField] protected float moveSpeedDropoffWithWeight = 0.03f;
+    [SerializeField] protected float minimumMoveFactor = 5f;
 
     [Header("Health")]
     [SerializeField] public float maxHealth = 3;
@@ -21,7 +23,6 @@ public class TransmutationBase : MonoBehaviour {
     // Components
     private Interactor interactor;
     private Rigidbody2D rigidBody;
-
     private Vector2 mostRecentMoveDirection = Vector2.zero;
 
     private void Awake()
@@ -39,7 +40,14 @@ public class TransmutationBase : MonoBehaviour {
         // if we are holding an input, accelerate in that direction
         if (moveDirection != Vector2.zero)
         {
-            Vector2 deltaVelocityIncrease = moveDirection * maxMoveSpeed / moveAcceleration * Time.fixedDeltaTime;
+            // this section modifies the movement speed with the weight of the player
+            float weightSlowFactor = GameManager.Instance.player.inventory.totalWeight * moveSpeedDropoffWithWeight;
+            float accelerationFactor = maxMoveSpeed / moveAcceleration;
+            float moveFactor = accelerationFactor - weightSlowFactor;
+            moveFactor = moveFactor < minimumMoveFactor ? minimumMoveFactor : moveFactor;
+
+            // apply the calculated velocity to the player
+            Vector2 deltaVelocityIncrease = moveDirection * moveFactor * Time.fixedDeltaTime;
             rigidBody.velocity += deltaVelocityIncrease;
             // if we are faster than our max speed, clamp our speed
             // technically since we only check for this when the player is moving at some point this means the velocity is uncapped when the player isn't holding a movement button
@@ -67,7 +75,7 @@ public class TransmutationBase : MonoBehaviour {
         health -= damageAmount;
         if (health < 0)
         {
-            GameManager.Instance.playerDeath();
+            GameManager.Instance.handlePlayerDeath();
         }
     }
 }

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(Collider2D))]
 public abstract class Transmutable : MonoBehaviour, IInteractable
 {
+    // this is the class that you will transform into
     [SerializeField] public TransmutationBase transmutation;
     private Outline outline;
     private void Awake()

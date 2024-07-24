@@ -1,5 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent (typeof(Interactor))]
+[RequireComponent (typeof(PlayerInputReceiver))]
+[RequireComponent (typeof(Inventory))]
 public class Player : MonoBehaviour
 {
     [Header("Information")]
@@ -9,7 +13,8 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
 
     // Components
-    private Interactor interactor;
+    public Interactor interactor;
+    public Inventory inventory;
     private Camera mainCamera;
     private PlayerInputReceiver playerInputReceiver;
     [SerializeField] public TransmutationBase currentTransmutation;
@@ -21,6 +26,7 @@ public class Player : MonoBehaviour
         interactor = GetComponent<Interactor>();
         mainCamera = Camera.main;
         playerInputReceiver = GetComponent<PlayerInputReceiver>();
+        inventory = GetComponent<Inventory>();
         if (currentTransmutation == null)
         {
             currentTransmutation = GetComponent<TransmutationBase>();
@@ -83,6 +89,11 @@ public class Player : MonoBehaviour
         // TODO replace final transmutation in hotbar
         // TODO handle transmutation cooldown
         return true;
+    }
+
+    public void addToInventory(MerchBase merch)
+    {
+        inventory.Add(merch);
     }
 
     public void Die()
