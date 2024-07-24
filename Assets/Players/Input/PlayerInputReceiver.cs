@@ -12,7 +12,7 @@ public class PlayerInputReceiver : MonoBehaviour
     // add strings for the names of all of the input mappings
     [Header("Action Map References")]
     [SerializeField] private string playerBasicActionMapName = "Player";
-    [SerializeField] private string playerHotbarActionMapName = "HotbarTransforming";
+    //[SerializeField] private string playerHotbarActionMapName = "HotbarTransforming"; likely not going to be used
     [SerializeField] private string playerInteractActionMapName = "Interact";
 
     // strings for actions
