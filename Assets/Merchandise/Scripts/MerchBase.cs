@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(Collider2D))]
-public abstract class MerchBase : MonoBehaviour, IInteractable
+public class MerchBase : MonoBehaviour, IInteractable
 {
     private Outline outline;
     [SerializeField] public int weight;
@@ -26,7 +26,6 @@ public abstract class MerchBase : MonoBehaviour, IInteractable
             cost = Random.Range(minCost, maxCost + 1); // the + 1 makes it inclusive
         }
         displayCost = (cost - 0.01f).ToString("F2"); // makes the decimal portion 0.99 to trick your monkey brains into thinking it's worth less than it actually is
-        Debug.Log(displayCost);
     }
     
     public void Selected()
@@ -43,8 +42,7 @@ public abstract class MerchBase : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         interactor.player.addToInventory(this);
-        Destroy(gameObject);
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
         return true;
     }
 
