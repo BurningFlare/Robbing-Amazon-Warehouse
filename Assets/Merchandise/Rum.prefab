@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3351811539148702536}
   - component: {fileID: 6373385285156624383}
   - component: {fileID: 4981014211809035432}
-  - component: {fileID: 924542792938668519}
+  - component: {fileID: 55010590770568771}
   m_Layer: 0
   m_Name: Rum
   m_TagString: Untagged
@@ -133,7 +133,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015625, y: -0.1}
+  m_Offset: {x: 0, y: -0.22881874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,9 +144,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.625, y: 0.8}
+  m_Size: {x: 1, y: 0.5423625}
   m_EdgeRadius: 0
---- !u!114 &924542792938668519
+--- !u!114 &55010590770568771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,10 +155,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6213000525034526950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e491a92b9222f54d9c76077f6c158af, type: 3}
+  m_Script: {fileID: 11500000, guid: df6cf1f59ea0f3245bb9cf9a53fe8020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 4
+  weight: 5
   minCost: 15
   maxCost: 30
   cost: 0
