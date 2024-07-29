@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     private Interactor interactor;
     public Animator cameraAnimator;
 
+    public float totalFunds = 0;
+    public float currentRent = 0;
+    public HashSet<System.Type> collectedMerch = new HashSet<System.Type>();
+
     private bool gameOver = false;
 
     private void Awake()
@@ -69,5 +73,17 @@ public class GameManager : MonoBehaviour
     {
         Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = player.gameObject.transform;
         interactor.handleTransmutationChanged();
+    }
+
+    public bool endDay()
+    {
+        // TODO animation and scene transition
+        foreach (MerchBase merchItem in player.inventory.merchList)
+        {
+            collectedMerch.Add(merchItem.GetType());
+        }
+        totalFunds += player.inventory.totalCost;
+        player.inventory.clear();
+        return true;
     }
 }
