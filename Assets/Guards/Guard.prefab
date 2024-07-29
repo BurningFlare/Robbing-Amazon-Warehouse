@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7797120670373510540}
-  - component: {fileID: 8523943857002088227}
+  - component: {fileID: 4790762311402506820}
   - component: {fileID: 6711855951196085702}
   - component: {fileID: 5937174920416848850}
+  - component: {fileID: 1360562481724239300}
   m_Layer: 0
-  m_Name: DefaultGuard
+  m_Name: Guard
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8523943857002088227
+--- !u!114 &4790762311402506820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,11 +44,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3086743973739487879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e510502a5147fc44b1f436e9a39c78e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cff8c6ac907d1448b7272e512aacb0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPlayer: {fileID: 5490919605243886738, guid: caf244ae0fb49c347802cfa673fccdf8, type: 3}
-  moveSpeed: 0.1
+  targetPlayer: {fileID: 0}
+  moveSpeed: 3
   patrolPoints: []
   targetPatrolPointIndex: 0
 --- !u!50 &6711855951196085702
@@ -129,3 +130,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!195 &1360562481724239300
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086743973739487879}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
