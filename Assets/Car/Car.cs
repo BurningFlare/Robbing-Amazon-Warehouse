@@ -10,6 +10,7 @@ public class Car : MonoBehaviour, IInteractable
     private void Awake()
     {
         outline = GetComponent<Outline>();
+        outline.enabled = false;
     }
     public void Deselected()
     {
