@@ -46,4 +46,11 @@ public class Inventory : MonoBehaviour
         }
         return listString.ToString();
     }
+
+    public void clear()
+    {
+        merchList.Clear();
+        totalCost = 0;
+        totalWeight = 0;
+    }
 }
