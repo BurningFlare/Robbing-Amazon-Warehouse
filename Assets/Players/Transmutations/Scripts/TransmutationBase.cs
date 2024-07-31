@@ -21,11 +21,11 @@ public class TransmutationBase : MonoBehaviour {
     [SerializeField] protected float interactionDist = 0.5f; // how far ahead to place the interaction point from the player while moving
 
     // Components
-    private Interactor interactor;
-    private Rigidbody2D rigidBody;
-    private Vector2 mostRecentMoveDirection = Vector2.zero;
+    protected Interactor interactor;
+    protected Rigidbody2D rigidBody;
+    protected Vector2 mostRecentMoveDirection = Vector2.zero;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         interactor = transform.parent.GetComponent<Interactor>();
         health = maxHealth;
@@ -34,7 +34,13 @@ public class TransmutationBase : MonoBehaviour {
 
     // handles acceleration and deceleration when given a direction
     // should be called per FixedUpdate in the Player class
-    public void HandleMovement(Vector2 moveDirection)
+    public virtual void HandleMovement(Vector2 moveDirection)
+    {
+        Accelerate(moveDirection);
+        UpdateInteractorPosition();
+    }
+
+    protected virtual void Accelerate(Vector2 moveDirection)
     {
         // Handle Acceleration
         // if we are holding an input, accelerate in that direction
@@ -57,10 +63,9 @@ public class TransmutationBase : MonoBehaviour {
         {
             mostRecentMoveDirection = moveDirection;
         }
-        UpdateInteractorPosition();
     }
 
-    void UpdateInteractorPosition()
+    protected void UpdateInteractorPosition()
     {
         interactor.interactionPoint.localPosition = mostRecentMoveDirection * interactionDist;
     }
