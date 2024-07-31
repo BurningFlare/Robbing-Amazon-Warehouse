@@ -20,7 +20,7 @@ public class ChasePlayerState : GuardBaseState
         {
             // chasePlayer
             lastKnownLocation = guard.targetPlayer.currentTransmutation.transform.position;
-            if (brokeLos) hasLostLOS = true
+            //if (brokeLos) hasLostLOS = true
         }
 
         // if player break LOS, chase to last known location. 
