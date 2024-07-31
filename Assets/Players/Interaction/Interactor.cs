@@ -28,6 +28,12 @@ public class Interactor : MonoBehaviour
         }
         interactionPointTrigger = interactionPoint.GetComponent<InteractionPointTrigger>();
         currentSelection = null;
+        RegisterEventBindings();
+    }
+
+    private void RegisterEventBindings()
+    {
+        Player.onTransmutation += handleTransmutationChanged;
     }
 
     private void Update()
@@ -58,7 +64,7 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    public void handleTransmutationChanged()
+    public void handleTransmutationChanged(TransmutationBase transmutation)
     {
         if (currentSelection != null)
         {

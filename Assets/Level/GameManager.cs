@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -12,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     private List<MerchBase> merch;
 
-    private Interactor interactor;
     public Animator cameraAnimator;
 
     public float totalFunds = 0;
@@ -30,7 +30,17 @@ public class GameManager : MonoBehaviour
         generateMerch();
         // TODO get the player somehow idk
 
-        interactor = player.GetComponent<Interactor>();
+        RegisterEventBindings();
+    }
+
+    private void RegisterEventBindings()
+    {
+        Player.onTransmutation += handleTransmutationChanged;
+    }
+
+    private void handleTransmutationChanged(TransmutationBase obj)
+    {
+        Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = obj.gameObject.transform;
     }
 
     private void generateMerch()
@@ -77,13 +87,6 @@ public class GameManager : MonoBehaviour
     public void openGameOverPanel()
     {
         gameOverPanel.SetActive(true);
-    }
-
-    // should be called by the player when they switch transmutations, should tell all relevant objects about this change
-    public void handleTransmutationChanged(TransmutationBase player)
-    {
-        Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = player.gameObject.transform;
-        interactor.handleTransmutationChanged();
     }
 
     public bool endDay()
