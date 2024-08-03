@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private bool dead = false;
 
     public static event Action<TransmutationBase> onTransmutation;
+    public static event Action onPlayerDeath;
 
     private void Awake()
     {
@@ -38,6 +39,13 @@ public class Player : MonoBehaviour
             //currentTransmutation = new TransmutationBase(
             //currentTransmutation.transform.SetParent(transform, false);
         }
+        RegisterEventBindings();
+    }
+    
+    private void RegisterEventBindings()
+    {
+        // freeze the player on death
+        GameManager.OnPlayerDeath += freezePlayer;
     }
 
     // Update is called once per frame
@@ -101,7 +109,8 @@ public class Player : MonoBehaviour
         inventory.Add(merch);
     }
 
-    public void Die()
+    // freeze the player and prevent any other inputs
+    private void freezePlayer()
     {
         // TODO play death animation
         dead = true;

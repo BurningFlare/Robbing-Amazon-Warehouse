@@ -15,19 +15,21 @@ public class GameManager : MonoBehaviour
 
     public Animator cameraAnimator;
 
+    private bool gameOver = false;
+    public static event Action OnDayEnd;
+    public static event Action OnPlayerDeath;
+
+    // these members should probably go into a different script at some other point since they aren't tied to the day
     public float totalFunds = 0;
     public float currentRent = 0;
     public HashSet<string> collectedMerch = new HashSet<string>();
-
-    private bool gameOver = false;
 
     private void Awake()
     {
         // we only want one game manager in our game
         if (Instance == null) { Instance = this; }
         else { Destroy(this); }
-        cameraAnimator = Camera.main.GetComponent<Animator>();
-        generateMerch();
+        SetupForLevel();
         // TODO get the player somehow idk
 
         RegisterEventBindings();
@@ -41,6 +43,13 @@ public class GameManager : MonoBehaviour
     private void handleTransmutationChanged(TransmutationBase obj)
     {
         Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = obj.gameObject.transform;
+    }
+
+    private void SetupForLevel()
+    {
+        cameraAnimator = Camera.main.GetComponent<Animator>();
+        generateMerch();
+        gameOver = false;
     }
 
     private void generateMerch()
@@ -67,11 +76,12 @@ public class GameManager : MonoBehaviour
     // should be called when player dies
     public void handlePlayerDeath()
     {
+        // gotta check if the game is already over or not
         if (!gameOver)
         {
+            OnPlayerDeath?.Invoke();
             cameraAnimator.SetBool("Dead", true);
             gameOver = true;
-            player.Die();
             StartCoroutine(waitToOpenGameOverPanel());
             // TODO death screen
         }
@@ -95,6 +105,7 @@ public class GameManager : MonoBehaviour
         foreach (MerchBase merchItem in player.inventory.merchList)
         {
             // delete the numbering added by unity
+            // FIXME this might actually be (clone) and not a number so uhhhhh fix that if that is the case
             Match match = Regex.Match(merchItem.name, @"^(.*) \([0-9]+\)$");
             if (match.Success)
             {

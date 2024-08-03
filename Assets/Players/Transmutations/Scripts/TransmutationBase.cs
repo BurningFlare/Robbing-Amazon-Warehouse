@@ -80,6 +80,8 @@ public class TransmutationBase : MonoBehaviour {
         health -= damageAmount;
         if (health < 0)
         {
+            // honestly how this works is a bit messy, I'm calling the GameManager to invoke the event that I want to invoke. This is because this class is meant to be temporary and I don't wanna hold the event here
+            // it's kinda equivalent to using a delegate... although I guess I can't forcibly remove all of the bindings if I wanted to
             GameManager.Instance.handlePlayerDeath();
         }
     }
